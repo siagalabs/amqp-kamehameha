@@ -1,0 +1,21 @@
+{
+  "name": "kamehameha",
+  "version": "1.0.0",
+  "main": "./src/kame.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "benchmark-small": "node ./src/benchmark.js",
+    "benchmark-tac": "NODE_ENV=tac node ./src/benchmark.js",
+    "benchmark-fixm": "NODE_ENV=fixm node ./src/benchmark.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "description": "AMQP messaging benchmark tool with TLS, encryption and signing support",
+  "dependencies": {
+    "byte-size": "^9.0.1",
+    "dotenv": "^16.5.0",
+    "rhea": "^3.0.4",
+    "yargs": "^17.7.2"
+  }
+}
