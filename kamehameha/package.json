@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "main": "./src/kame.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "benchmark-small": "node ./src/benchmark.js",
-    "benchmark-tac": "NODE_ENV=tac node ./src/benchmark.js",
-    "benchmark-fixm": "NODE_ENV=fixm node ./src/benchmark.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Azmadi Abdullah <azmadi@siagalabs.com>",
   "license": "SEE LICENSE IN LICENSE.txt",
   "description": "AMQP messaging benchmark tool with TLS, encryption and signing support",
   "dependencies": {
