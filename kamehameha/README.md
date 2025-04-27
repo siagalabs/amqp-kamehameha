@@ -160,7 +160,7 @@ The following scripts, contains preset for benchmarking the broker with few scen
 - `benchmark-both-tac.js` - Run series of test scenarios using a medium sized message payload.
 - `benchmark-both-fixm.js` - Run series of test scenarios using a large size message payload.
 
-The scripts depends on the environment variables defined in `.env` file, copy the `.env.example` file
+The scripts depends on the environment variables defined in `.env` file, copy the `env.example` file
 to `.env` and adjust the variable accordingly.
 
 To run the test
