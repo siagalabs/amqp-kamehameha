@@ -114,6 +114,10 @@ class Crypto {
   }
 
   verifySignature (messageBody, signature) {
+    if (!this.signingCert) {
+      console.warn('Signing certificate not found. Skipping signature verification.');
+      return true;
+    }
     const verify = crypto.createVerify("RSA-SHA256");
     verify.update(messageBody);
     verify.end();

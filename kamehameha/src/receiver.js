@@ -63,7 +63,7 @@ class Receiver {
 
     // const messageSignature = context.message.annotations?.['x-digital-signature'];
     const messageSignature = context.message.application_properties?.['x-digital-signature'];
-    if (messageSignature) {
+    if (messageSignature && this.config.signCert) {
       const verifyStartTime = Date.now();
       const isValid = this.crypto.verifySignature(decryptedMessage, messageSignature);
       if (!isValid) {
