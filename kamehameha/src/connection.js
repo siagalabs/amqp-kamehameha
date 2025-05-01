@@ -43,6 +43,12 @@ class Connection extends EventEmitter {
       options.password = this.config.password;
     }
 
+    if (this.config.username && this.config.password) {
+      options.username = this.config.username;
+      options.password = this.config.password;
+      options.enable_sasl_external = false;
+    }
+
     return options;
   }
 
