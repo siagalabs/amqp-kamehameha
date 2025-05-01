@@ -76,6 +76,7 @@ class Sender extends EventEmitter {
   }
 
   createMessage () {
+    /*
     const msg = {
       body: this.payloadBody,
       application_properties: {
@@ -101,6 +102,36 @@ class Sender extends EventEmitter {
 
     if (Object.keys(annotations).length > 0) {
       msg.message_annotations = annotations;
+    }
+    */
+
+    // Use application properties for
+    // signature and encryption
+    // due to some broker discarding message_annotations
+    const application_properties = {
+      sent_time: Date.now(),
+    }
+
+    const msg = {
+      body: this.payloadBody,
+    };
+
+    // Handle signing if enabled
+    if (this.config.sign) {
+      const signature = this.crypto.signMessage(this.payloadBody);
+      application_properties['x-digital-signature'] = signature;
+    }
+
+    // Handle encryption if enabled
+    if (this.config.encrypt) {
+      const result = this.crypto.encryptMessage(this.payloadBody);
+      msg.body = result.encryptedMessage;
+      application_properties['x-encrypted-key'] = result.encryptedKey;
+      application_properties['x-iv'] = result.iv;
+    }
+
+    if (Object.keys(application_properties).length > 0) {
+      msg.application_properties = application_properties;
     }
 
     return msg;
