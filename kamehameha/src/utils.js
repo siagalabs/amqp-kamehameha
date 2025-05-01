@@ -154,6 +154,7 @@ class Crypto {
 
   decryptMessage (message) {
     // console.log('to decrypt:', message);
+    /*
     // Check if message and message_annotations exist
     if (!message || !message.message_annotations) {
       console.warn('Invalid message: message_annotations not found. Test result might be incorrect. Please ensure the queue is empty before running the test.');
@@ -167,6 +168,21 @@ class Crypto {
     }
     const encryptedKey = Buffer.from(message.message_annotations['x-encrypted-key'], 'base64');
     const iv = Buffer.from(message.message_annotations['x-iv'], 'base64');
+    */
+    // Check if message and message_annotations exist
+    if (!message || !message.application_properties) {
+      console.warn('Invalid message: application_properties not found. Test result might be incorrect. Please ensure the queue is empty before running the test.');
+      return message.body;
+    }
+
+    // Check if required encryption fields exist
+    if (!message.application_properties['x-encrypted-key'] || !message.application_properties['x-iv'] || !message.body) {
+      console.warn('Invalid message: missing encryption fields (x-encrypted-key, x-iv or body). Test result might be incorrect. Please ensure the queue is empty before running the test.');
+      return message.body;
+    }
+    const encryptedKey = Buffer.from(message.application_properties['x-encrypted-key'], 'base64');
+    const iv = Buffer.from(message.application_properties['x-iv'], 'base64');
+
     const encryptedData = Buffer.from(message.body, 'base64');
 
     const aesKey = crypto.privateDecrypt(
